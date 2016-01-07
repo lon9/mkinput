@@ -16,7 +16,10 @@ func main() {
 	// Reading Json rom stdin.
 	dec := json.NewDecoder(os.Stdin)
 	var g Generator
-	dec.Decode(&g)
+	err := dec.Decode(&g)
+	if err != nil{
+		panic(err)
+	}
 
 	file, err := os.OpenFile("input.txt", os.O_WRONLY|os.O_CREATE, 0600)
 	if err != nil {

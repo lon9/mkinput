@@ -7,8 +7,7 @@
       "max":100,
       "rows": 1,
       "cols": 10,
-      "sep": " ",
-      "size": true
+      "sep": " "
     }
   ]
 }

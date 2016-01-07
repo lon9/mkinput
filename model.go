@@ -2,7 +2,7 @@ package main
 
 // Generator is object of generator
 type Generator struct {
-	Set       int64      `json:"set"`
+	Set       int        `json:"set"`
 	Sep       string     `json:"sep"`
 	Templates []Template `json:"templates"`
 }
@@ -11,6 +11,6 @@ type Generator struct {
 type Template struct {
 	Min  int64 `json:"min"`
 	Max  int64 `json:"max"`
-	Rows int64 `json:"rows"`
-	Cols int64 `json:"cols"`
+	Rows int   `json:"rows"`
+	Cols int   `json:"cols"`
 }

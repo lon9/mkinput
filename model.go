@@ -5,12 +5,14 @@ type Generator struct {
 	Set       int        `json:"set"`
 	Sep       string     `json:"sep"`
 	Templates []Template `json:"templates"`
+	Size      bool       `json:"size"`
 }
 
 // Template is template of structure.
 type Template struct {
-	Min  int64 `json:"min"`
-	Max  int64 `json:"max"`
+	Min  int `json:"min"`
+	Max  int `json:"max"`
 	Rows int   `json:"rows"`
 	Cols int   `json:"cols"`
+	Sep string `json:"sep"`
 }

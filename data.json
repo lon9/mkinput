@@ -1,20 +1,20 @@
 {
-  "set": 100,
+  "set": 2,
   "sep":"EOF",
   "templates":[
     {
       "min":0,
       "max":10,
-      "row": 1,
+      "rows": 1,
       "cols": 1,
       "sep": ""
     },
     {
       "min":0,
       "max":200,
-      "rows":100,
-      "cols":1,
-      "sep":" "
+      "rows":1,
+      "cols":10,
+      "sep":""
     }
   ]
 }

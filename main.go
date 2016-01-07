@@ -3,9 +3,12 @@ package main
 import (
 	"bufio"
 	"encoding/json"
-	"fmt"
 	"math/rand"
 	"os"
+	"strconv"
+	"strings"
+	"fmt"
+	"time"
 )
 
 func main() {
@@ -14,26 +17,35 @@ func main() {
 	dec := json.NewDecoder(os.Stdin)
 	var g Generator
 	dec.Decode(&g)
-	fmt.Printf("%+v\n", g)
 
-	file, err := os.OpenFile("template.txt", os.O_WRONLY|os.O_CREATE, 0600)
+	file, err := os.OpenFile("input.txt", os.O_WRONLY|os.O_CREATE, 0600)
 	if err != nil {
 		panic(err)
 	}
-	writer := bufio.NewWriter(file)
+	w := bufio.NewWriter(file)
+	defer file.Close()
+	file.Truncate(0)
 
 	for i := 0; i < g.Set; i++ {
 		for _, t := range g.Templates {
-			for j := 0; i < t.Rows; i++ {
-				row := ""
+			for j := 0; j < t.Rows; j++ {
+				vals := make([]string, t.Cols)
 				for k := 0; k < t.Cols; k++ {
-
+					v := randIntString(t.Min, t.Max)
+					vals[k] = v
 				}
-				row += "\n"
+				row := strings.Join(vals, t.Sep)
+				fmt.Fprint(w, row+"\n")
 			}
 
 		}
-		writer.Write([]byte(g.Sep))
+		fmt.Fprint(w, g.Sep+"\n")
 	}
+	w.Flush()
 
+}
+
+func randIntString(min, max int)string {
+	rand.Seed(time.Now().UnixNano())
+	return strconv.Itoa(min + rand.Intn(max-min))
 }

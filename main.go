@@ -3,11 +3,11 @@ package main
 import (
 	"bufio"
 	"encoding/json"
+	"fmt"
 	"math/rand"
 	"os"
 	"strconv"
 	"strings"
-	"fmt"
 	"time"
 )
 
@@ -17,7 +17,7 @@ func main() {
 	dec := json.NewDecoder(os.Stdin)
 	var g Generator
 	err := dec.Decode(&g)
-	if err != nil{
+	if err != nil {
 		panic(err)
 	}
 
@@ -31,8 +31,8 @@ func main() {
 
 	for i := 0; i < g.Set; i++ {
 		for _, t := range g.Templates {
-			if t.Size{
-				fmt.Fprint(w, strconv.Itoa(t.Cols) + "\n")
+			if t.Size {
+				fmt.Fprint(w, strconv.Itoa(t.Cols)+"\n")
 			}
 			for j := 0; j < t.Rows; j++ {
 				vals := make([]string, t.Cols)
@@ -51,7 +51,7 @@ func main() {
 
 }
 
-func randIntString(min, max int)string {
+func randIntString(min, max int) string {
 	rand.Seed(time.Now().UnixNano())
 	return strconv.Itoa(min + rand.Intn(max-min))
 }

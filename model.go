@@ -9,10 +9,10 @@ type Generator struct {
 
 // Template is template of structure.
 type Template struct {
-	Min  int `json:"min"`
-	Max  int `json:"max"`
-	Rows int   `json:"rows"`
-	Cols int   `json:"cols"`
-	Sep	 string `json:"sep"`
-	Size bool       `json:"size"`
+	Min  int    `json:"min"`
+	Max  int    `json:"max"`
+	Rows int    `json:"rows"`
+	Cols int    `json:"cols"`
+	Sep  string `json:"sep"`
+	Size bool   `json:"size"`
 }

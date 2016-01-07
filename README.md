@@ -1,1 +1,1 @@
-#mktemplate
+#mkinput

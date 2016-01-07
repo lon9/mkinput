@@ -28,6 +28,9 @@ func main() {
 
 	for i := 0; i < g.Set; i++ {
 		for _, t := range g.Templates {
+			if t.Size{
+				fmt.Fprint(w, strconv.Itoa(t.Cols) + "\n")
+			}
 			for j := 0; j < t.Rows; j++ {
 				vals := make([]string, t.Cols)
 				for k := 0; k < t.Cols; k++ {

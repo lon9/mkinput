@@ -4,17 +4,11 @@
   "templates":[
     {
       "min":0,
-      "max":10,
+      "max":100,
       "rows": 1,
-      "cols": 1,
-      "sep": ""
-    },
-    {
-      "min":0,
-      "max":200,
-      "rows":1,
-      "cols":10,
-      "sep":""
+      "cols": 10,
+      "sep": " ",
+      "size": true
     }
   ]
 }

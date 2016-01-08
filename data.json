@@ -5,10 +5,12 @@
     {
       "min":1,
       "max":4,
-      "rows": 1,
-      "cols": 100,
-      "sep": "",
-      "size":true
+      "minRows": 1,
+      "maxRows": 9,
+      "minCols": 1,
+      "maxCols": 10,
+      "sep": " ",
+      "rowSize": true
     }
   ]
 }

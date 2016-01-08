@@ -11,8 +11,10 @@ type Generator struct {
 type Template struct {
 	Min  int    `json:"min"`
 	Max  int    `json:"max"`
-	Rows int    `json:"rows"`
-	Cols int    `json:"cols"`
+	MinRows int `json:"minRows"`
+	MaxRows int `json:"maxRows"`
+	MinCols int `json:"minCols"`
+	MaxCols int `json:"maxCols"`
 	Sep  string `json:"sep"`
 	Size bool   `json:"size"`
 }

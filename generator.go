@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"path/filepath"
 	"strconv"
 	"strings"
 )
@@ -29,11 +30,17 @@ type Template struct {
 }
 
 // Generate generates input.txt.
-func (g *Generator) Generate(filename string) {
-	file, err := os.OpenFile(filename, os.O_WRONLY|os.O_CREATE, 0600)
-	if err != nil {
-		panic(err)
+func (g *Generator) Generate(filename string) (err error) {
+	var file *os.File
+	if file, err = os.OpenFile(filename, os.O_WRONLY|os.O_CREATE, 0600); err != nil {
+		if err := os.MkdirAll(filepath.Dir(filename), 0700); err != nil {
+			return err
+		}
+		if file, err = os.OpenFile(filename, os.O_WRONLY|os.O_CREATE, 0600); err != nil {
+			return err
+		}
 	}
+
 	w := bufio.NewWriter(file)
 	defer file.Close()
 	file.Truncate(0)
@@ -63,4 +70,5 @@ func (g *Generator) Generate(filename string) {
 	}
 	w.Flush()
 
+	return
 }

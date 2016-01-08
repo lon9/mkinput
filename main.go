@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
 	"math/rand"
 	"os"
 	"strconv"
@@ -10,6 +11,12 @@ import (
 
 func main() {
 
+	var filepath = flag.String("f", "input.txt", "filepath for generated file")
+	flag.Parse()
+	if filepath == nil {
+		*filepath = "input.txt"
+	}
+
 	// Reading Json rom stdin.
 	dec := json.NewDecoder(os.Stdin)
 	var g Generator
@@ -17,7 +24,10 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	g.Generate("input.txt")
+	err = g.Generate(*filepath)
+	if err != nil {
+		panic(err)
+	}
 }
 
 func randIntString(min, max int) string {

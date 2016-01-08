@@ -6,11 +6,11 @@
       "min":1,
       "max":4,
       "minRows": 1,
-      "maxRows": 2,
+      "maxRows": 9,
       "minCols": 1,
-      "maxCols": 100,
-      "sep": "",
-      "size": true
+      "maxCols": 10,
+      "sep": " ",
+      "rowSize": true
     }
   ]
 }

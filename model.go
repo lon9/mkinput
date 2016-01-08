@@ -16,5 +16,6 @@ type Template struct {
 	MinCols int `json:"minCols"`
 	MaxCols int `json:"maxCols"`
 	Sep  string `json:"sep"`
-	Size bool   `json:"size"`
+	RowSize bool   `json:"rowSize"`
+	ColSize bool `json: "colSize"`
 }

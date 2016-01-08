@@ -32,8 +32,8 @@ func main() {
 	for i := 0; i < g.Set; i++ {
 		for _, t := range g.Templates {
 			rows := randInt(t.MinRows, t.MaxRows)
-			if t.RowSize{
-				fmt.Fprint(w, strconv.Itoa(rows) + "\n")
+			if t.RowSize {
+				fmt.Fprint(w, strconv.Itoa(rows)+"\n")
 			}
 			for j := 0; j < rows; j++ {
 				cols := randInt(t.MinCols, t.MaxCols)
@@ -61,7 +61,7 @@ func randIntString(min, max int) string {
 	return strconv.Itoa(min + rand.Intn(max-min+1))
 }
 
-func randInt(min, max int)int{
+func randInt(min, max int) int {
 	rand.Seed(time.Now().UnixNano())
 	return min + rand.Intn(max-min+1)
 }

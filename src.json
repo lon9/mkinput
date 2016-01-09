@@ -1,5 +1,5 @@
 {
-  "set": 100,
+  "set": 2,
   "sep":"EOF",
   "templates":[
     {
@@ -7,8 +7,8 @@
       "max":4,
       "minRows": 1,
       "maxRows": 9,
-      "minCols": 1,
-      "maxCols": 10,
+      "minCols": 2,
+      "maxCols": 2,
       "sep": " ",
       "rowSize": true
     }

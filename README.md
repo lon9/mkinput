@@ -10,9 +10,9 @@ Executable [drone.io](https://drone.io/github.com/Rompei/mkinput/files)
 
 Input [json file](https://github.com/Rompei/mkinput/blob/master/src.json)
 
-```json
+```
 {
-  "set": 100,           // The number of data sets.
+  "set": 2,           // The number of data sets.
   "sep":"EOF",          // Separator of the data sets.
   "templates":[         // Data set templates.
     {
@@ -20,8 +20,8 @@ Input [json file](https://github.com/Rompei/mkinput/blob/master/src.json)
       "max":4,          // Max value of the data.
       "minRows": 1,     // Min rows.
       "maxRows": 9,     // Max rows.
-      "minCols": 1,     // Min clos.
-      "maxCols": 10,    // Max cols.
+      "minCols": 2,     // Min clos.
+      "maxCols": 2,    // Max cols.
       "sep": " ",       // Separator of cols.
       "rowSize": true,  // If we write this field, row size is written in front of the data.
       "colSize": false

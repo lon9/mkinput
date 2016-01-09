@@ -3,10 +3,7 @@ package main
 import (
 	"encoding/json"
 	"flag"
-	"math/rand"
 	"os"
-	"strconv"
-	"time"
 )
 
 func main() {
@@ -28,14 +25,4 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-}
-
-func randIntString(min, max int) string {
-	rand.Seed(time.Now().UnixNano())
-	return strconv.Itoa(min + rand.Intn(max-min+1))
-}
-
-func randInt(min, max int) int {
-	rand.Seed(time.Now().UnixNano())
-	return min + rand.Intn(max-min+1)
 }

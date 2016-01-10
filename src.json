@@ -4,7 +4,7 @@
   "templates":[
     {
       "min":1,
-      "max":4,
+      "max":5,
       "minRows": 1,
       "maxRows": 9,
       "minCols": 2,

@@ -1,11 +1,7 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
-	"path/filepath"
-	"strconv"
 	"strings"
 )
 
@@ -30,31 +26,18 @@ type Template struct {
 }
 
 // Generate generates input.txt.
-func (g *Generator) Generate(filename string) (err error) {
-	var file *os.File
-	if file, err = os.OpenFile(filename, os.O_WRONLY|os.O_CREATE, 0600); err != nil {
-		if err := os.MkdirAll(filepath.Dir(filename), 0700); err != nil {
-			return err
-		}
-		if file, err = os.OpenFile(filename, os.O_WRONLY|os.O_CREATE, 0600); err != nil {
-			return err
-		}
-	}
-
-	w := bufio.NewWriter(file)
-	defer file.Close()
-	file.Truncate(0)
+func (g *Generator) Generate() {
 
 	for i := 0; i < g.Set; i++ {
 		for _, t := range g.Templates {
 			rows := randInt(t.MinRows, t.MaxRows)
 			if t.RowSize {
-				fmt.Fprint(w, strconv.Itoa(rows)+"\n")
+				fmt.Println(rows)
 			}
 			for j := 0; j < rows; j++ {
 				cols := randInt(t.MinCols, t.MaxCols)
 				if t.ColSize {
-					fmt.Fprint(w, strconv.Itoa(cols)+"\n")
+					fmt.Println(cols)
 				}
 				vals := make([]string, cols)
 				for k := 0; k < cols; k++ {
@@ -62,13 +45,11 @@ func (g *Generator) Generate(filename string) (err error) {
 					vals[k] = v
 				}
 				row := strings.Join(vals, t.Sep)
-				fmt.Fprint(w, row+"\n")
+				fmt.Println(row)
 			}
 
 		}
-		fmt.Fprint(w, g.Sep+"\n")
+		fmt.Println(g.Sep)
 	}
-	w.Flush()
 
-	return
 }

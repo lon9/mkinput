@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -23,9 +22,7 @@ func TestGenerate(t *testing.T) {
 				t.Error(err)
 
 			}
-			if err = g.Generate(fmt.Sprintf("dest/input%v.txt", count)); err != nil {
-				t.Error(err)
-			}
+			g.Generate()
 			count++
 
 		}

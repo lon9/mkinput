@@ -12,7 +12,7 @@ Input [json file](https://github.com/Rompei/mkinput/blob/master/src.json)
 
 ```
 {
-  "set": 2,           // The number of data sets.
+  "set": 2,             // The number of data sets.
   "sep":"EOF",          // Separator of the data sets.
   "templates":[         // Data set templates.
     {
@@ -21,7 +21,7 @@ Input [json file](https://github.com/Rompei/mkinput/blob/master/src.json)
       "minRows": 1,     // Min rows.
       "maxRows": 9,     // Max rows.
       "minCols": 2,     // Min clos.
-      "maxCols": 2,    // Max cols.
+      "maxCols": 2,     // Max cols.
       "sep": " ",       // Separator of cols.
       "rowSize": true,  // If we write this field, row size is written in front of the data.
       "colSize": false
@@ -30,13 +30,13 @@ Input [json file](https://github.com/Rompei/mkinput/blob/master/src.json)
 }
 ```
 
-Type command. `mkinput -f <output-filepath> < <source-file>`
+Type command. `mkinput < <source-file>`
 
 ```bash
-$ mkinput -f "input.txt" < src.json
+$ mkinput < src.json
 ```
 
-then generate input.txt like [this](https://github.com/Rompei/mkinput/blob/master/input.txt)
+then generate data sets like this.
 
 ```
 8

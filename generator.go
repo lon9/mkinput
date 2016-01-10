@@ -16,6 +16,7 @@ type Generator struct {
 type Template struct {
 	Min     float64 `json:"min"`
 	Max     float64 `json:"max"`
+	Dig     int     `json:"dig"`
 	MinRows int     `json:"minRows"`
 	MaxRows int     `json:"maxRows"`
 	MinCols int     `json:"minCols"`
@@ -41,7 +42,7 @@ func (g *Generator) Generate() {
 				}
 				vals := make([]string, cols)
 				for k := 0; k < cols; k++ {
-					v := randFloatString(t.Min, t.Max)
+					v := randFloatString(t.Min, t.Max, t.Dig)
 					vals[k] = v
 				}
 				row := strings.Join(vals, t.Sep)

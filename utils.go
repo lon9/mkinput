@@ -1,20 +1,14 @@
 package main
 
 import (
-	"fmt"
 	"math/rand"
 	"strconv"
 	"time"
 )
 
-func randFloatString(min, max float64) string {
+func randFloatString(min, max float64, dig int) string {
 	rand.Seed(time.Now().UnixNano())
-	return fmt.Sprintf("%f", min+rand.Float64()*(max-min))
-}
-
-func randFloat(min, max float64) float64 {
-	rand.Seed(time.Now().UnixNano())
-	return min + rand.Float64()*(max-min)
+	return strconv.FormatFloat(min+rand.Float64()*(max-min), 'f', dig, 64)
 }
 
 func randIntString(min, max int) string {

@@ -42,15 +42,12 @@ func (g *Generator) Generate() {
 				}
 				vals := make([]string, cols)
 				for k := 0; k < cols; k++ {
-					v := randFloatString(t.Min, t.Max, t.Dig)
-					vals[k] = v
+					vals[k] = randFloatString(t.Min, t.Max, t.Dig)
 				}
-				row := strings.Join(vals, t.Sep)
-				fmt.Println(row)
+				fmt.Println(strings.Join(vals, t.Sep))
 			}
 
 		}
 		fmt.Println(g.Sep)
 	}
-
 }

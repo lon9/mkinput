@@ -6,9 +6,9 @@ import (
 	"time"
 )
 
-func randFloatString(min, max float64, dig int) string {
+func randFloatString(min, max float64, dig uint) string {
 	rand.Seed(time.Now().UnixNano())
-	return strconv.FormatFloat(min+rand.Float64()*(max-min), 'f', dig, 64)
+	return strconv.FormatFloat(min+rand.Float64()*(max-min), 'f', int(dig), 64)
 }
 
 func randIntString(min, max int) string {
@@ -16,7 +16,7 @@ func randIntString(min, max int) string {
 	return strconv.Itoa(min + rand.Intn(max-min+1))
 }
 
-func randInt(min, max int) int {
+func randInt(min, max uint) int {
 	rand.Seed(time.Now().UnixNano())
-	return min + rand.Intn(max-min+1)
+	return int(min) + rand.Intn(int(max-min+1))
 }

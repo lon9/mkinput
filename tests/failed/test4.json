@@ -5,7 +5,7 @@
     {
       "min":4,
       "max":1,
-      "minRows": 1,
+      "minRows": -1,
       "maxRows": 9,
       "minCols": 1,
       "maxCols": 10,

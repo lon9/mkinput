@@ -30,21 +30,30 @@ type Template struct {
 }
 
 var (
+
 	// ErrJSON is raised when failed to decode JSON.
 	ErrJSON = errors.New("Failed to decode JSON.")
+
 	// ErrInvalidRange is raised when maximum value was greater than maximum value.
 	ErrInvalidRange = errors.New("Maximum value must be equal or greater than minimum value.")
+
+	// ErrInvalidMin is raised when minRows or minCols is 0.
+	ErrInvalidMin = errors.New("minRows and minCols must be greater than 1")
 )
 
 // NewGeneratorFromStdin constructs Generator from stdin.
 func NewGeneratorFromStdin(stdin io.Reader) (g *Generator, err error) {
 	dec := json.NewDecoder(stdin)
-	err = dec.Decode(&g)
-	if err != nil {
+	if err = dec.Decode(&g); err != nil {
 		err = ErrJSON
 		return
 	}
-	err = g.checkMinMax()
+	if err = g.checkMinMax(); err != nil {
+		return
+	}
+	if err = g.checkMinRowsCols(); err != nil {
+		return
+	}
 	return
 }
 
@@ -52,6 +61,15 @@ func (g *Generator) checkMinMax() error {
 	for _, t := range g.Templates {
 		if t.Max < t.Min || t.MaxRows < t.MinRows || t.MaxCols < t.MinCols {
 			return ErrInvalidRange
+		}
+	}
+	return nil
+}
+
+func (g *Generator) checkMinRowsCols() error {
+	for _, t := range g.Templates {
+		if t.MinRows == 0 || t.MinCols == 0 {
+			return ErrInvalidMin
 		}
 	}
 	return nil

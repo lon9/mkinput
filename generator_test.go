@@ -9,8 +9,10 @@ import (
 )
 
 func TestNewGeneratorFromStdioSuccess(t *testing.T) {
-	err := filepath.Walk("src/success/", func(path string, info os.FileInfo, err error) error {
-		if !info.IsDir() {
+	count := 1
+	err := filepath.Walk("tests/success/", func(path string, info os.FileInfo, err error) error {
+		if !info.IsDir() && filepath.Ext(info.Name()) == ".json" {
+			t.Logf("Test case: %d", count)
 			f, err := ioutil.ReadFile(path)
 			if err != nil {
 				t.Error(err)
@@ -21,6 +23,7 @@ func TestNewGeneratorFromStdioSuccess(t *testing.T) {
 			if err != nil {
 				t.Error(err)
 			}
+			count++
 		}
 		return nil
 	})
@@ -32,8 +35,10 @@ func TestNewGeneratorFromStdioSuccess(t *testing.T) {
 }
 
 func TestNewGeneratorFromStdioFailed(t *testing.T) {
-	err := filepath.Walk("src/failed/", func(path string, info os.FileInfo, err error) error {
-		if !info.IsDir() {
+	count := 1
+	err := filepath.Walk("tests/failed/", func(path string, info os.FileInfo, err error) error {
+		if !info.IsDir() && filepath.Ext(info.Name()) == ".json" {
+			t.Logf("Test case: %d", count)
 			f, err := ioutil.ReadFile(path)
 			if err != nil {
 				t.Error(err)
@@ -44,7 +49,7 @@ func TestNewGeneratorFromStdioFailed(t *testing.T) {
 			if err == nil {
 				t.Fatal("Error was expected, but not occured.")
 			}
-
+			count++
 		}
 		return nil
 	})
@@ -55,8 +60,10 @@ func TestNewGeneratorFromStdioFailed(t *testing.T) {
 }
 
 func TestGenerate(t *testing.T) {
-	err := filepath.Walk("src/success/", func(path string, info os.FileInfo, err error) error {
-		if !info.IsDir() {
+	count := 1
+	err := filepath.Walk("tests/success/", func(path string, info os.FileInfo, err error) error {
+		if !info.IsDir() && filepath.Ext(info.Name()) == ".json" {
+			t.Logf("Test case: %d", count)
 			f, err := ioutil.ReadFile(path)
 			if err != nil {
 				t.Error(err)
@@ -68,6 +75,7 @@ func TestGenerate(t *testing.T) {
 				t.Error(err)
 			}
 			g.Generate()
+			count++
 		}
 		return nil
 	})

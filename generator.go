@@ -1,7 +1,10 @@
 package main
 
 import (
+	"encoding/json"
+	"errors"
 	"fmt"
+	"io"
 	"strings"
 )
 
@@ -24,6 +27,34 @@ type Template struct {
 	Sep     string  `json:"sep"`
 	RowSize bool    `json:"rowSize"`
 	ColSize bool    `json: "colSize"`
+}
+
+var (
+	// ErrJSON is raised when failed to decode JSON.
+	ErrJSON = errors.New("Failed to decode JSON.")
+	// ErrInvalidRange is raised when maximum value was greater than maximum value.
+	ErrInvalidRange = errors.New("Maximum value must be equal or greater than minimum value.")
+)
+
+// NewGeneratorFromStdin constructs Generator from stdin.
+func NewGeneratorFromStdin(stdin io.Reader) (g *Generator, err error) {
+	dec := json.NewDecoder(stdin)
+	err = dec.Decode(&g)
+	if err != nil {
+		err = ErrJSON
+		return
+	}
+	err = g.checkMinMax()
+	return
+}
+
+func (g *Generator) checkMinMax() error {
+	for _, t := range g.Templates {
+		if t.Max < t.Min || t.MaxRows < t.MinRows || t.MaxCols < t.MinCols {
+			return ErrInvalidRange
+		}
+	}
+	return nil
 }
 
 // Generate generates input.txt.

@@ -1,0 +1,16 @@
+{
+  "set": 100,
+  "sep":"EOF",
+  "templates":[
+    {
+      "min":4,
+      "max":1,
+      "minRows": 1,
+      "maxRows": 9,
+      "minCols": 1,
+      "maxCols": 10,
+      "sep": " ",
+      "rowSize": true
+    }
+  ]
+}

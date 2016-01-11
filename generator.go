@@ -1,7 +1,10 @@
 package main
 
 import (
+	"encoding/json"
+	"errors"
 	"fmt"
+	"io"
 	"strings"
 )
 
@@ -16,14 +19,60 @@ type Generator struct {
 type Template struct {
 	Min     float64 `json:"min"`
 	Max     float64 `json:"max"`
-	Dig     int     `json:"dig"`
-	MinRows int     `json:"minRows"`
-	MaxRows int     `json:"maxRows"`
-	MinCols int     `json:"minCols"`
-	MaxCols int     `json:"maxCols"`
+	Dig     uint    `json:"dig"`
+	MinRows uint    `json:"minRows"`
+	MaxRows uint    `json:"maxRows"`
+	MinCols uint    `json:"minCols"`
+	MaxCols uint    `json:"maxCols"`
 	Sep     string  `json:"sep"`
 	RowSize bool    `json:"rowSize"`
 	ColSize bool    `json: "colSize"`
+}
+
+var (
+
+	// ErrJSON is raised when failed to decode JSON.
+	ErrJSON = errors.New("Failed to decode JSON.")
+
+	// ErrInvalidRange is raised when maximum value was greater than maximum value.
+	ErrInvalidRange = errors.New("Maximum value must be equal or greater than minimum value.")
+
+	// ErrInvalidMin is raised when minRows or minCols is 0.
+	ErrInvalidMin = errors.New("minRows and minCols must be greater than 1")
+)
+
+// NewGeneratorFromStdin constructs Generator from stdin.
+func NewGeneratorFromStdin(stdin io.Reader) (g *Generator, err error) {
+	dec := json.NewDecoder(stdin)
+	if err = dec.Decode(&g); err != nil {
+		err = ErrJSON
+		return
+	}
+	if err = g.checkMinMax(); err != nil {
+		return
+	}
+	if err = g.checkMinRowsCols(); err != nil {
+		return
+	}
+	return
+}
+
+func (g *Generator) checkMinMax() error {
+	for _, t := range g.Templates {
+		if t.Max < t.Min || t.MaxRows < t.MinRows || t.MaxCols < t.MinCols {
+			return ErrInvalidRange
+		}
+	}
+	return nil
+}
+
+func (g *Generator) checkMinRowsCols() error {
+	for _, t := range g.Templates {
+		if t.MinRows == 0 || t.MinCols == 0 {
+			return ErrInvalidMin
+		}
+	}
+	return nil
 }
 
 // Generate generates input.txt.

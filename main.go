@@ -17,6 +17,9 @@ func main() {
 		case ErrInvalidRange:
 			fmt.Println(ErrInvalidRange)
 			os.Exit(1)
+		default:
+			fmt.Println(err)
+			os.Exit(1)
 		}
 	}
 	g.Generate()
